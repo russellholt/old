@@ -1,0 +1,29 @@
+# screen dimensions x y, put pict info in file?
+600 600 0
+
+# x center  y center  width -0.35 0 .5 | -.2 .4 .10 | -.745429 .113008 .0005
+-.5 0 3
+
+# escape test distance, CPM multiplier
+10 1
+
+# maximum iterations
+150
+
+# number of colors, scale them?
+16 0
+
+# write output to screen, quiet mode?
+0 1
+
+# use splat alg?  want spikes?  Use CPM?
+0 0 0
+
+# Set type (0=Mandelbrot, 1=Julia), real const, imag const (phoenix 1 .56667 0)
+0 .56667 0
+
+# Want stalks?  Beneath what value? (Probably around 0.03)
+1  0.0058
+
+# Use "Phoenix" equations ?  (Best as a Julia set)
+0

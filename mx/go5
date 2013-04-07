@@ -1,0 +1,37 @@
+#!/usr/local/bin/ksh
+
+File=$1
+uptime
+
+(( line1 = 160 ))
+(( line2 = 200 ))
+(( count = 1 ))
+
+while (( line2 > 0 ))
+do
+	if (( count == 5 ))
+	then
+		(( count = 99 ))
+	fi
+
+	mx $File $line1 $line2 $count &
+	(( line2 = line1 - 1 ))
+	(( line1 = line1 - 40 ))
+	(( count += 1 ))
+done
+wait
+
+echo -n Building file...
+
+(( count = 2 ))
+while (( count < 6 ))
+do
+	if (( count == 5 ))
+	then
+		(( count = 99 ))
+	fi
+	cat ut$count >> ut1
+	rm ut$count
+	(( count += 1 ))
+done
+echo done

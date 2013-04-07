@@ -1,0 +1,59 @@
+#!/usr/local/bin/ksh
+
+# new version of go
+# By Russell Holt, late '92
+# syntax: go datafile [ # rows ]  [ # processes ]
+
+File=$1
+Total=$2
+Rows=$3
+
+if [ -z "$File" ]
+then
+	echo Usage: go datafile [# rows]  [# processes]
+	exit 1
+fi
+
+if [ -z "$Total" ]
+then
+	Total=200
+fi
+
+if [ -z "$Rows" ]
+then
+	Rows=5
+fi
+
+(( subt = Total/Rows ))
+(( line1 = Total - subt ))
+(( line2 = Total ))
+(( count = 1 ))
+
+while (( line2 > 0 ))
+do
+	if (( count == Rows ))
+	then
+		(( count = 99 ))
+	fi
+
+	mx $File $line1 $line2 $count &
+	(( line2 = line1 - 1 ))
+	(( line1 = line1 - subt ))
+	(( count += 1 ))
+done
+wait
+
+echo ----------------
+echo -n Building file...
+
+(( count = 2 ))
+while (( count < Rows+1 ))
+do
+	if (( count == Rows ))
+	then
+		(( count = 99 ))
+	fi
+	cat ut$count >> ut1; rm ut$count
+	(( count += 1 ))
+done
+echo done
