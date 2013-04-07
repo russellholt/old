@@ -6,6 +6,7 @@
  *
  * by Russell Holt June 29-30, 1993
  */
+#include <stdlib.h>
 #include <stdio.h>
 #include <curses.h>
 #include <ctype.h>
@@ -22,10 +23,6 @@
 	move(filey, filex); printw("%s", filename); \
 	move(lengthy, lengthx); printw("%05X (%d)", nchars, nchars)
 
-extern char *malloc();
-extern char *calloc();
-extern char *realloc();
-
 int OnePage();
 int ReadFile();
 void DrawCurs();
@@ -37,7 +34,7 @@ short maincy, maincx, indexy, indexx, filey, filex, lengthy, lengthx,
 	cursy=0, cursx=7, Side;
 WINDOW *page1;
 
-main(argc, argv)
+int main(argc, argv)
 int argc;
 char **argv;
 {
@@ -47,7 +44,7 @@ short Done=0;
 FILE *fp, *test;
 
 	if (argc > 1) {
-		free(filename);
+		/* free(filename); */
 		filename = (char *) malloc (sizeof(char) * (strlen(argv[1]) + 1));
 		filename = strcpy(filename, argv[1]);
 		}
